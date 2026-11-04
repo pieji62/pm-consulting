@@ -1,0 +1,41 @@
+﻿---
+import site from '../data/site.json';
+import '../styles/global.css';
+interface Props { title: string; lang?: string; }
+const { title, lang = site.lang } = Astro.props;
+const es = lang === 'es';
+const name = es ? 'PM Consultores Internacionales' : 'PM Consulting';
+const pages = site.pages.filter(p => p.lang === lang);
+const current = Math.max(0, pages.findIndex(p => Astro.url.pathname === (p.slug ? `/${p.slug}/` : '/')));
+const alternate = site.pages.filter(p => p.lang !== lang)[current];
+const labels = es ? ['Inicio', 'Servicios', 'Experiencia', 'Contacto'] : ['Home', 'Services', 'Experience', 'Contact'];
+---
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={pages[current]?.body || site.description} />
+    <meta name="theme-color" content="#061f3b" />
+    <title>{title} · {site.name}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    {alternate && <link rel="alternate" hreflang={es ? 'en' : 'es'} href={alternate.slug ? `/${alternate.slug}/` : '/'} />}
+  </head>
+  <body>
+    <a class="skip" href="#content">{es ? 'Saltar al contenido' : 'Skip to content'}</a>
+    <header class="shell header">
+      <a class="brand" href={es ? '/inicio/' : '/'} aria-label={`${name}, ${labels[0]}`}><span class="brand-mark" aria-hidden="true">PM<span>•</span></span><span>{name}</span></a>
+      <nav aria-label={es ? 'Navegación principal' : 'Main navigation'}>
+        {pages.map((p, i) => <a href={p.slug ? `/${p.slug}/` : '/'} aria-current={i === current ? 'page' : undefined}>{labels[i]}</a>)}
+      </nav>
+      <div class="language-selector" role="group" aria-label={es ? 'Idioma' : 'Language'}>
+        {['en', 'es'].map(code => {
+          const target = site.pages.filter(p => p.lang === code)[current];
+          return <a class="language" href={target.slug ? `/${target.slug}/` : '/'} lang={code} hreflang={code} aria-current={code === lang ? 'true' : undefined}>{code === 'en' ? 'English' : 'Español'}</a>;
+        })}
+      </div>
+    </header>
+    <main id="content" class="shell" tabindex="-1"><slot /></main>
+    <footer class="shell footer"><p>{name}<br /><span>{es ? 'Finanzas · Proyectos · Estrategia' : 'Finance · Projects · Strategy'}</span></p><p>{es ? 'Países de experiencia profesional' : 'Countries of professional experience'}<br /><span>{es ? 'Colombia · Estados Unidos · Ecuador · Rumanía' : 'Colombia · United States · Ecuador · Romania'}</span></p></footer>
+  </body>
+</html>

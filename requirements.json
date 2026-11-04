@@ -1,0 +1,106 @@
+{
+  "businessName": "PM Consulting / PM Consultores Internacionales",
+  "businessType": "Financial consulting, strategic planning assessments, courses and seminars",
+  "audience": "Universities and companies",
+  "objective": "Present consulting and training services and Marcello Paul Villalva Ceron's professional experience to universities and companies.",
+  "visual": "Professional, readable navy, gold and cream design based on the supplied logo; responsive layout and keyboard-accessible navigation. Language selector shows English and Español together, with the current language clearly highlighted using the existing palette.",
+  "branding": "PM Consulting in English; PM Consultores Internacionales in Spanish. Use the supplied logo preserved at source-assets/pm-logo.png, including its existing Spanish wording. Tagline: Finance, Projects, Strategy / Finanzas, Proyectos, Estrategia.",
+  "contact": "Show only Colombia, United States, Ecuador and Romania as countries of professional experience. No email, phone, street address or office claims. Contact details are deferred at the owner's request.",
+  "contentSource": "Owner's discovery answers and supplied CV and logo. Owner confirmed the short biography and public use of their name. The bilingual page text below is drafted for approval. Do not publish the CV, personal contact details, unconfirmed credentials, testimonials or client endorsements. No other images supplied; use the logo and typography for this version.",
+  "languages": [
+    "en",
+    "es"
+  ],
+  "pages": [
+    {
+      "slug": "",
+      "lang": "en",
+      "title": "PM Consulting",
+      "body": "Finance, Projects, Strategy. Financial consulting, strategic planning assessments, courses and seminars for universities and companies. Explore our services and professional experience."
+    },
+    {
+      "slug": "services",
+      "lang": "en",
+      "title": "Services",
+      "body": "Courses and seminars covering finance, projects, budgets, accounts receivable, personal finance, warehouse management, negotiation and conflict resolution. Financial consulting and strategic planning assessments using key performance indicators (KPIs) and objectives and key results (OKRs)."
+    },
+    {
+      "slug": "experience",
+      "lang": "en",
+      "title": "Experience",
+      "body": "Marcello Paul Villalva Ceron brings more than 40 years of experience in financial leadership, international consulting, and university and professional training. His background includes financial and administrative management and professional experience in Colombia, the United States, Ecuador and Romania."
+    },
+    {
+      "slug": "contact",
+      "lang": "en",
+      "title": "Contact",
+      "body": "Countries of professional experience: Colombia, United States, Ecuador and Romania. Public contact details will be added later."
+    },
+    {
+      "slug": "inicio",
+      "lang": "es",
+      "title": "PM Consultores Internacionales",
+      "body": "Finanzas, Proyectos, Estrategia. Consultoría financiera, evaluaciones de planificación estratégica, cursos y seminarios para universidades y empresas. Conozca nuestros servicios y experiencia profesional."
+    },
+    {
+      "slug": "servicios",
+      "lang": "es",
+      "title": "Servicios",
+      "body": "Cursos y seminarios sobre finanzas, proyectos, presupuestos, cuentas por cobrar, finanzas personales, gestión de almacenes, negociación y resolución de conflictos. Consultoría financiera y evaluaciones de planificación estratégica con indicadores clave de desempeño (KPIs) y objetivos y resultados clave (OKRs)."
+    },
+    {
+      "slug": "experiencia",
+      "lang": "es",
+      "title": "Experiencia",
+      "body": "Marcello Paul Villalva Ceron cuenta con más de 40 años de experiencia en liderazgo financiero, consultoría internacional y formación universitaria y profesional. Su trayectoria incluye gestión financiera y administrativa y experiencia profesional en Colombia, Estados Unidos, Ecuador y Rumanía."
+    },
+    {
+      "slug": "contacto",
+      "lang": "es",
+      "title": "Contacto",
+      "body": "Países de experiencia profesional: Colombia, Estados Unidos, Ecuador y Rumanía. Los datos de contacto públicos se añadirán más adelante."
+    }
+  ],
+  "features": [
+    {
+      "capability": "information",
+      "description": "Present services and experience on static information pages. Original request: MY SERVICES, EXPERIENCE IN COURSES, SEMINARIES AND FINANCE CONSULTANT AND ASSESMENTS. Subjects: FINANCE MATTERS, LIKE PROJECTS, BUDGETS, ACCOUNTS CEIVABLES, PERSONAL FINANCES, WAREHOUSE MANGEMENT, NEGOTIATIONS AND CONFLICT RESOLUTIONS. Assessment focus: SPECIALLY IN STRATEGIC PLANING MATTERS WITH KPIS AND OKRS. These describe professional services; the owner confirmed visitors read services and contact the business directly.",
+      "analysis": {
+        "level": "GREEN",
+        "rationale": "Public descriptions of consulting and training services; no online evaluation tool requested."
+      }
+    },
+    {
+      "capability": "multilingual",
+      "description": "Static website pages in English and Spanish. Original language answer: BOTH. Original display name answer: BOTH IN SPANISH AND ENGLISH. Language selector update requested by owner: i LIKE IT JUST FIX THE LANGUAGE SELECTOR. Clarification: Show both English and Español clearly. Show both labels together; highlight the active language and link each label to the matching page in that language.",
+      "analysis": {
+        "level": "GREEN",
+        "rationale": "Static bilingual pages and local navigation links with an indicated current language; no visitor scripts or services."
+      }
+    },
+    {
+      "capability": "responsive",
+      "description": "Responsive website with navy, gold and cream styling, supplied logo, readable typography and keyboard navigation. Owner accepted the proposed palette and Home, Services, Experience and Contact pages with YES.",
+      "analysis": {
+        "level": "GREEN",
+        "rationale": "HTML and CSS presentation using a local logo asset."
+      }
+    },
+    {
+      "capability": "contact_details",
+      "description": "Contact information page showing countries of professional experience. Original request: PUT THE COUNTRIES THAT SET UP IN THE LOGO. Owner confirmed Colombia, United States, Ecuador and Romania and specified JUST THE COUNTRIES FOR NOW.",
+      "analysis": {
+        "level": "GREEN",
+        "rationale": "Static country names only; public email and phone are deferred and no visitor data is collected."
+      }
+    },
+    {
+      "capability": "external_integration",
+      "description": "Requested test website deployment: do github pages for now as an override, this is just a test, not an actual business use",
+      "analysis": {
+        "level": "YELLOW",
+        "rationale": "Owner clarified test use. GitHub Pages is outside the assessed Azure deployment workflow. It needs assessment of hosting terms, path handling, hosting protections and a verification-preserving publication process; test use does not supply that assessment."
+      }
+    }
+  ]
+}

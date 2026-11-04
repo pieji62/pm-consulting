@@ -1,0 +1,9 @@
+{
+  "responseOverrides": { "404": { "rewrite": "/404.html" } },
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'none'; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=()"
+  }
+}

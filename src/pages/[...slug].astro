@@ -1,0 +1,35 @@
+﻿---
+import Layout from '../layouts/Layout.astro';
+import site from '../data/site.json';
+export function getStaticPaths() {
+  return site.pages.map(page => ({ params: { slug: page.slug || undefined }, props: { page } }));
+}
+const { page } = Astro.props;
+const language = page.lang;
+const es = language === 'es';
+const pages = site.pages.filter(p => p.lang === language);
+const services = pages[1];
+const next = page.slug === services.slug ? pages[2] : services;
+const labels = es ? ['Inicio', 'Servicios', 'Experiencia', 'Contacto'] : ['Home', 'Services', 'Experience', 'Contact'];
+---
+<Layout title={page.title} lang={language}>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow"><span aria-hidden="true"></span>{es ? 'Finanzas · Proyectos · Estrategia' : 'Finance · Projects · Strategy'}</p>
+      <h1>{page.title}</h1>
+      <p class="intro">{page.body}</p>
+      <a class="button" href={`/${next.slug}/`}>{page.slug === services.slug ? (es ? 'Conozca nuestra experiencia' : 'Explore our experience') : (es ? 'Conozca nuestros servicios' : 'Explore our services')} <span aria-hidden="true">↗</span></a>
+    </div>
+    <figure class="identity">
+      <div class="identity-top"><span>{es ? 'Finanzas y consultoría' : 'Finance & consulting'}</span><span aria-hidden="true">PM / 01</span></div>
+      <img src="/pm-logo.webp" width="1758" height="895" alt="PM Consultores Internacionales — Finanzas, Proyectos, Estrategia" fetchpriority="high" />
+      <figcaption>{es ? 'Universidades y empresas' : 'Universities & companies'}<span aria-hidden="true">↗</span></figcaption>
+    </figure>
+  </section>
+  <section class="explore" aria-label={es ? 'Explore el sitio' : 'Explore the site'}>
+    <div class="section-heading"><p class="eyebrow">{es ? 'Conozca PM' : 'Discover PM'}</p><p>{es ? 'Servicios y experiencia profesional' : 'Services & professional experience'}</p></div>
+    <div class="page-grid">
+      {pages.filter(p => p.slug !== page.slug).map((p, i) => <a class="card" href={p.slug ? `/${p.slug}/` : '/'}><div class="card-top"><span class="eyebrow">0{i + 1}</span><span class="arrow" aria-hidden="true">↗</span></div><h2>{labels[pages.indexOf(p)]}</h2><p>{p.body}</p></a>)}
+    </div>
+  </section>
+</Layout>

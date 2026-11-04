@@ -1,0 +1,77 @@
+name: Publish with authorization
+on:
+  workflow_dispatch:
+    inputs:
+      revision:
+        description: Copy the full SHA of the main revision you authorize for publication
+        required: true
+        type: string
+      confirm:
+        description: I reviewed the site and authorize its public deployment
+        required: true
+        default: false
+        type: boolean
+permissions:
+  contents: read
+concurrency:
+  group: production
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check authorization for this revision
+        env:
+          APPROVED: ${{ inputs.confirm }}
+          REQUESTED: ${{ inputs.revision }}
+          ACTUAL: ${{ github.sha }}
+          BRANCH: ${{ github.ref }}
+        run: |
+          test "$APPROVED" = "true"
+          test "$REQUESTED" = "$ACTUAL"
+          test "$BRANCH" = "refs/heads/main"
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24'
+      - run: npm ci --ignore-scripts
+      - run: npx --no-install playwright install --with-deps chromium
+      - run: npm run verify
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
+      - run: node orchestrator/cli.mjs ready .
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: verified-site
+          path: dist/
+          if-no-files-found: error
+          retention-days: 1
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: always()
+        with:
+          name: release-evidence
+          path: evidence/
+          retention-days: 7
+  deploy:
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: verified-site
+          path: dist
+      - uses: Azure/static-web-apps-deploy@1a947af9992250f3bc2e68ad0754c0b0c11566c9 # v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: upload
+          app_location: dist
+          api_location: ''
+          output_location: ''
+          skip_app_build: true
+          skip_api_build: true
+          production_branch: main
